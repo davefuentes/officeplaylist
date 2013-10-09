@@ -5,31 +5,51 @@
 
 var mongoose = require('mongoose')
 var Schema = mongoose.Schema
-var userPlugin = require('mongoose-user')
 
 /**
  * User schema
  */
 
 var UserSchema = new Schema({
-  name: { type: String, default: '' },
-  email: { type: String, default: '' },
-  hashed_password: { type: String, default: '' },
-  salt: { type: String, default: '' }
+    name: {
+        default: '',
+        required: true,
+        type: String
+    },
+
+    firstName: {
+        default: '',
+        required: true,
+        type: String
+    },
+
+    lastName: {
+        default: '',
+        required: true,
+        type: String
+    },
+
+    gender: {
+        default: '',
+        required: true,
+        type: String
+    },
+
+    location: {
+        default: '',
+        required: true,
+        type: String
+    },
+
+    email: {
+        default: '',
+        index: {
+            unique: true
+        },
+        required: true,
+        type: String
+    }
 })
-
-/**
- * User plugin
- */
-
-UserSchema.plugin(userPlugin, {})
-
-/**
- * Add your
- * - pre-save hooks
- * - validations
- * - virtuals
- */
 
 /**
  * Methods
