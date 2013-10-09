@@ -4,7 +4,13 @@
  */
 
 exports.index = function (req, res) {
-  res.render('home', {
-    title: 'Node Express Mongoose Boilerplate'
-  })
+
+    var name = null
+
+    if(req.user) name = req.user.name
+
+    res.render('home', {
+        title: 'Welcome!',
+        name: name
+    })
 }

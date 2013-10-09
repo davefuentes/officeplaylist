@@ -24,11 +24,11 @@ module.exports = {
 
     staging: {
         root: rootPath,
-        db: process.env.MONGOHQ_URL,
+        db: process.env.STG_MONGODB,
         facebook: {
             clientId: '1422610261287338',
             secret: process.env.STG_FCBK_SECRET,
-            callbackUrl: 'http://officeplaylist.jit.su/login/facebook/callback'
+            callbackUrl: 'http://stg.officeplaylist.jit.su/login/facebook/callback'
         }
     },
 
