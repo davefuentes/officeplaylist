@@ -38,5 +38,14 @@
         "mocha": "latest",
         "should": "latest",
         "supertest": "latest"
-    }
+    },
+
+    "keywords": [
+        "music",
+        "real-time",
+        "playlist",
+        "collaborative",
+        "office",
+        "dj"
+    ]
 }
