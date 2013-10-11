@@ -37,7 +37,7 @@
         "connect-mongo": "latest",
         "connect-flash": "latest",
         "view-helpers": "latest",
-        "jade": "latest",
+        "express-hbs": "latest",
         "async": "latest",
         "forever": "latest"
     },

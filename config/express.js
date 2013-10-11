@@ -9,12 +9,19 @@ var helpers = require('view-helpers')
 var pkg = require('../package')
 var flash = require('connect-flash')
 var env = process.env.NODE_ENV || 'development'
+var hbs = require('express-hbs')
+var path = require('path')
+var fs = require('fs')
 
 /*!
  * Expose
  */
 
 module.exports = function (app, config, passport) {
+
+    var partialsDir = path.join(config.root + '/app/views/partials');
+    var layoutsDir = path.join(config.root + '/app/views/layouts');
+    var filenames = fs.readdirSync(partialsDir);
 
     app.set('showStackError', true)
 
@@ -26,7 +33,21 @@ module.exports = function (app, config, passport) {
 
     // views config
     app.set('views', config.root + '/app/views')
-    app.set('view engine', 'jade')
+    app.set('view engine', 'hbs')
+    app.engine('hbs', hbs.express3({
+        partialsDir: partialsDir,
+        layoutsDir: layoutsDir
+    }));
+
+    filenames.forEach(function (filename) {
+        var matches = /^([^.]+).hbs$/.exec(filename);
+        if (!matches) {
+            return;
+        }
+        var name = matches[1];
+        var template = fs.readFileSync(partialsDir + '/' + filename, 'utf8');
+        hbs.registerPartial(name, template);
+    });
 
     app.configure(function () {
         // bodyParser should be above methodOverride
