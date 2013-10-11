@@ -28,7 +28,7 @@ module.exports = {
         facebook: {
             clientId: '1422610261287338',
             secret: process.env.STG_FCBK_SECRET,
-            callbackUrl: 'http://stg.officeplaylist.jit.su/login/facebook/callback'
+            callbackUrl: 'http://officeplaylist.jit.su/login/facebook/callback'
         }
     },
 

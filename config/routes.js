@@ -28,4 +28,9 @@ module.exports = function (app, passport) {
     app.get('/login/facebook/callback', passport.authenticate('facebook', passportOptions), function(req, res) {
         res.redirect('/')
     })
+
+    app.get('/logout', function(req, res){
+        req.logout();
+        res.redirect('/');
+    });
 }

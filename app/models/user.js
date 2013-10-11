@@ -11,6 +11,15 @@ var Schema = mongoose.Schema
  */
 
 var UserSchema = new Schema({
+    facebook_id: {
+        default: '',
+        index: {
+            unique: true
+        },
+        required: true,
+        type: String
+    },
+
     name: {
         default: '',
         required: true,
@@ -19,34 +28,31 @@ var UserSchema = new Schema({
 
     firstName: {
         default: '',
-        required: true,
+        required: false,
         type: String
     },
 
     lastName: {
         default: '',
-        required: true,
+        required: false,
         type: String
     },
 
     gender: {
         default: '',
-        required: true,
+        required: false,
         type: String
     },
 
     location: {
         default: '',
-        required: true,
+        required: false,
         type: String
     },
 
     email: {
         default: '',
-        index: {
-            unique: true
-        },
-        required: true,
+        required: false,
         type: String
     }
 })

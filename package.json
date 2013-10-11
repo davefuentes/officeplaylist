@@ -1,7 +1,7 @@
 {
     "name": "OfficePlaylist",
     "description": "A real-time collaborative music playlist to share at the office",
-    "version": "0.0.0",
+    "version": "0.0.0-8",
     "author": {
         "name": "David Morabito",
         "email": "kernellstudios@gmail.com",
@@ -55,5 +55,5 @@
         "office",
         "dj"
     ],
-    "subdomain": "stg.officeplaylist"
+    "subdomain": "officeplaylist"
 }

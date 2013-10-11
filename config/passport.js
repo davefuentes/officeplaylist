@@ -36,7 +36,7 @@ module.exports = function (passport, config) {
         var data = profile._json
 
         User.findOne({
-            email: data.email
+            facebook_id: data.id
         },
 
         function(err, user) {
@@ -46,13 +46,20 @@ module.exports = function (passport, config) {
             if(err) return done(null, profile)
 
             if(err == null) {
+                var location = null;
+
+                if(data.location) {
+                    location = data.location.name
+                }
+
                 var newUser = new User({
+                    facebook_id: data.id,
                     name: data.name,
                     firstName: data.first_name,
                     lastName: data.last_name,
                     gender: data.gender,
-                    location: data.location.name,
-                    email: profile._json.email
+                    location: location,
+                    email: data.email
                 })
 
                 newUser.save(function(err) {
