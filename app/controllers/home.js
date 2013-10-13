@@ -5,12 +5,12 @@
 
 exports.index = function (req, res) {
 
-    var name = null
+    var profile = null
 
-    if(req.user) name = req.user.name
+    if(req.user) profile = req.user
 
     res.render('home', {
         title: 'Welcome!',
-        name: name
+        profile: profile
     })
 }
