@@ -39,7 +39,8 @@
         "view-helpers": "latest",
         "express-hbs": "latest",
         "async": "latest",
-        "forever": "latest"
+        "forever": "latest",
+        "cryptojs": "latest"
     },
     "devDependencies": {
         "nodemon": "latest",

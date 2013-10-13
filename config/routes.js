@@ -12,6 +12,8 @@ var passportOptions = {
 // controllers
 var home = require('home')
 var login = require('login')
+var create = require('create')
+var listen = require('listen')
 
 /**
  * Expose
@@ -30,7 +32,13 @@ module.exports = function (app, passport) {
     })
 
     app.get('/logout', function(req, res){
-        req.logout();
-        res.redirect('/');
+        req.logout()
+        res.redirect('/')
     });
+
+    app.get('/create', create.index)
+
+    app.post('/create/save', create.save)
+
+    app.get('/listen/:id([0-9a-f]{5,40})', listen.index)
 }

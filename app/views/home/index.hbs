@@ -1,2 +1,7 @@
 {{!< default }}
 <h1>Welcome</h1>
+
+<h2>Our playlists:</h2>
+{{#each playlists}}
+    <a href="/listen/{{url}}">{{name}}</a><br>
+{{/each}}

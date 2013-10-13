@@ -1,0 +1,14 @@
+{{!< default }}
+
+<h1>Create New Playlist</h1>
+<p>{{message}}: </p>
+<p>{{playlistName}}, @{{playlistUrl}}</p>
+<form action="/create/save" method="post">
+    <label>
+        Playlist Name
+        <input type="text" name="playlistName" placeholder="Playlist Name">
+    </label>
+    <input type="hidden" name="_csrf" value="{{csrf_token}}">
+    <input type="submit" value="Create">
+    </label>
+</form>
