@@ -9,6 +9,7 @@ var env = process.env.NODE_ENV || 'development'
 var config = require('./config/config')[env]
 var mongoose = require('mongoose')
 var fs = require('fs')
+var http = require('http')
 
 require('express-namespace')
 
@@ -32,7 +33,10 @@ require('./config/routes')(app, passport)
 
 // Start the app by listening on <port>
 var port = process.env.PORT || 3000
-app.listen(port)
+var io = require('socket.io').listen(app.listen(port));
+
+// Socket logic
+require('./config/socket.js')(io)
 
 // Expose app
 module.exports = app

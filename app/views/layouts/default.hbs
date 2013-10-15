@@ -11,25 +11,7 @@
             <script src="/js/html5shiv.js"></script>
             <script src="/js/respond.min.js"></script>
         <![endif]-->
-
-        <script>
-            // Remove the ugly Facebook appended hash
-            if (window.location.hash && window.location.hash === "#_=_") {
-                if (window.history && history.pushState) {
-                    window.history.pushState("", document.title, window.location.pathname);
-                } else {
-                    // Prevent scrolling by storing the page's current scroll offset
-                    var scroll = {
-                        top: document.body.scrollTop,
-                        left: document.body.scrollLeft
-                    };
-                    window.location.hash = "";
-                    // Restore the scroll offset, should be flicker free
-                    document.body.scrollTop = scroll.top;
-                    document.body.scrollLeft = scroll.left;
-                }
-            }
-        </script>
+        {{> scripts_head}}
     </head>
     <body>
 
@@ -78,7 +60,10 @@
             </nav>
         </header>
     {{{body}}}
-    <script src="/js/jquery.js"></script>
-    <script src="/js/bootstrap.js"></script>
+    {{> scripts_foot}}
+
+    {{#if scripts_listen}}
+        {{> scripts_listen}}
+    {{/if}}
     </body>
 </html>

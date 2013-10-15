@@ -30,9 +30,7 @@
         "express": "latest",
         "express-namespace": "latest",
         "mongoose": "latest",
-        "mongoose-user": "latest",
         "passport": "latest",
-        "passport-local": "latest",
         "passport-facebook": "latest",
         "connect-mongo": "latest",
         "connect-flash": "latest",
@@ -40,7 +38,8 @@
         "express-hbs": "latest",
         "async": "latest",
         "forever": "latest",
-        "cryptojs": "latest"
+        "cryptojs": "latest",
+        "socket.io": "latest"
     },
     "devDependencies": {
         "nodemon": "latest",
