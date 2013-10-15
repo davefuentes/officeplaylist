@@ -23,7 +23,7 @@ module.exports = function(io) {
             socket.join(room_id);
             // echo to client they've connected
             socket.emit('updatechat', 'SERVER', 'you have connected to: ' + socket.room_name);
-            io.sockets.emit('updateusers', io.sockets.clients(socket.room));
+            io.sockets.emit('updateusers', usernames);
             // echo to room that a person has connected to their room
             socket.broadcast.to(socket.room).emit('updatechat', 'SERVER', socket.username + ' has connected to this room');
         });
