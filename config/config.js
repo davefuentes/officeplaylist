@@ -15,6 +15,7 @@ module.exports = {
     development: {
         root: rootPath,
         db: 'mongodb://localhost/officeplaylist',
+        localhost: 'http://localhost:3000',
         facebook: {
             clientId: '502707963154265',
             secret: process.env.DEV_FCBK_SECRET,
@@ -25,6 +26,7 @@ module.exports = {
     staging: {
         root: rootPath,
         db: process.env.STG_MONGODB,
+        localhost: 'http://officeplaylist.jit.su',
         facebook: {
             clientId: '1422610261287338',
             secret: process.env.STG_FCBK_SECRET,
