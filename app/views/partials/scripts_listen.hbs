@@ -5,13 +5,14 @@
         // Playlist realtime
         var room_id = '{{{room.id}}}';
         var room_name = '{{{room.name}}}';
-        var user = "{{{profile.name}}}";
+        var user_id = "{{{profile.facebook_id}}}";
+        var user_name = "{{{profile.name}}}";
         var socket = io.connect('{{{env.localhost}}}');
 
         // on connection to server, ask for user's name with an anonymous callback
         socket.on('connect', function(){
             // call the server-side function 'adduser' and send one parameter (value of prompt)
-            socket.emit('adduser', user, room_id, room_name);
+            socket.emit('adduser', user_id, user_name, room_id, room_name);
         });
 
         // listener, whenever the server emits 'updatechat', this updates the chat body
@@ -21,7 +22,13 @@
 
         // Updates userslist
         socket.on('updateusers', function(usernames) {
-            console.log(usernames);
+            $('#users').empty();
+            $.each(usernames, function(index, element) {
+                if(element) {
+                    $('#users').append('<p>' + element[1] + '</p>')
+                    console.log(element[1])
+                }
+            })
         })
 
         // when the client clicks SEND

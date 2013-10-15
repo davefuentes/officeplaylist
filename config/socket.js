@@ -11,38 +11,46 @@ module.exports = function(io) {
     io.sockets.on('connection', function (socket) {
 
         // when the client emits 'adduser', this listens and executes
-        socket.on('adduser', function(username, room_id, room_name){
+        socket.on('adduser', function(user_id, user_name, room_id, room_name){
 
-            // store the username in the socket session for this client
-            socket.username = username;
-            // store the room name in the socket session for this client
-            socket.room = room_id;
-            // store room name
-            socket.room_name = room_name;
-            // send client to room
-            socket.join(room_id);
-            // echo to client they've connected
+            socket.user_id = user_id
+            socket.user_name = user_name
+            socket.room_id = room_id
+            socket.room_name = room_name
+
+            usernames.push([socket.user_id, socket.user_name])
+
+            socket.join(socket.room_id);
+
             socket.emit('updatechat', 'SERVER', 'you have connected to: ' + socket.room_name);
             io.sockets.emit('updateusers', usernames);
-            // echo to room that a person has connected to their room
-            socket.broadcast.to(socket.room).emit('updatechat', 'SERVER', socket.username + ' has connected to this room');
+            socket.broadcast.to(socket.room_id).emit('updatechat', 'SERVER', socket.user_name + ' has connected to this room');
         });
 
         // when the client emits 'sendchat', this listens and executes
         socket.on('sendchat', function (data) {
             // we tell the client to execute 'updatechat' with 2 parameters
-            io.sockets.in(socket.room).emit('updatechat', socket.username, data);
+            io.sockets.in(socket.room_id).emit('updatechat', socket.user_name, data);
         });
 
         // when the user disconnects.. perform this
         socket.on('disconnect', function(){
             // remove the username from global usernames list
-            delete usernames[socket.username.id];
+
+            var username_index = 0;
+
+            usernames.forEach(function(val, key) {
+                if(socket.user_id == val[0]) {
+                    username_index = key
+                }
+            })
+
+            delete usernames[username_index];
             // update list of users in chat, client-side
             io.sockets.emit('updateusers', usernames);
             // echo globally that this client has left
-            socket.broadcast.to(socket.room).emit('updatechat', 'SERVER', socket.username + ' has disconnected');
-            socket.leave(socket.room);
+            socket.broadcast.to(socket.room_id).emit('updatechat', 'SERVER', socket.user_name + ' has disconnected');
+            socket.leave(socket.room_id);
         });
     });
 }
