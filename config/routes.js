@@ -36,9 +36,16 @@ module.exports = function (app, passport) {
         res.redirect('/')
     });
 
-    app.get('/create', create.index)
+    app.get('/create', ensureAuthenticated, create.index)
 
-    app.post('/create/save', create.save)
+    app.post('/create/save', ensureAuthenticated, create.save)
 
-    app.get('/listen/:id([0-9a-f]{5,40})', listen.index)
+    app.get('/listen/:id([0-9a-f]{5,40})', ensureAuthenticated, listen.index)
+
+    function ensureAuthenticated(req, res, next) {
+        if (req.isAuthenticated()) {
+            return next()
+        }
+        res.redirect('/login')
+    }
 }
